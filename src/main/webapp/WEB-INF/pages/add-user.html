@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:utext="#{page.title.add-user}">User list</title>
+</head>
+<body>
+<form th:action="@{/ok}" th:object="${user}" th:method="post">
+    <div>
+        <label th:utext="#{table.column.name} + '<br>'">Name</label>
+        <input type="text" th:field="*{name}" placeholder="string" ></input>
+        <br>
+        <label th:utext="#{table.column.lastName} + '<br>'">Last Name</label>
+        <input type="text" th:field="*{lastName}" placeholder="string" ></input>
+        <br>
+        <label th:utext="#{table.column.age} + '<br>'">Last Name</label>
+        <input type="number" th:field="*{age}"  placeholder="integer" ></input>
+        <br>
+        <label th:utext="#{table.column.email} + '<br>'">Last Name</label>
+        <input type="text" th:field="*{email}" placeholder="string" ></input>
+        <br>
+        <label th:utext="#{table.column.role} + '<br>'">Last Name</label>
+        <input type="text" th:field="*{role}" placeholder="string" ></input>
+    </div>
+
+    <div>
+        <button type="submit" th:utext="#{button.add-user}"></button>
+    </div>
+
+</form>
+</body>
+</html>

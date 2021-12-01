@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:utext="#{page.title.all-users}">User list</title>
+</head>
+<body>
+<div>
+    <table border="1px">
+        <tr>
+            <th th:utext="#{table.column.id}">Id</th>
+            <th th:utext="#{table.column.name}">Name</th>
+            <th th:utext="#{table.column.lastName}">Last Name</th>
+            <th th:utext="#{table.column.age}">Age</th>
+            <th th:utext="#{table.column.email}">E-mail</th>
+            <th th:utext="#{table.column.role}">Role</th>
+        </tr>
+        <tr th:each ="u : ${listUsers}">
+            <td th:utext="${u.id}">...</td>
+            <td th:utext="${u.name}">...</td>
+            <td th:utext="${u.lastName}">...</td>
+            <td th:utext="${u.age}">...</td>
+            <td th:utext="${u.email}">...</td>
+            <td th:utext="${u.role}">...</td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
