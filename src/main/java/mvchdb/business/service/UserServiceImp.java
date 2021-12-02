@@ -3,7 +3,6 @@ package mvchdb.business.service;
 import mvchdb.business.dao.UserDao;
 import mvchdb.business.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,19 +26,19 @@ public class UserServiceImp implements UserService{
 
     @Override
     @Transactional
-    public void addUser(User user) {
-        userDao.addUser(user);
-    }
-
-    @Override
-    @Transactional
-    public void updateUser() {
-        userDao.updateUser();
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 
     @Override
     @Transactional
     public void deleteUser(int id) {
         userDao.deleteUser(id);
+    }
+
+    @Override
+    @Transactional
+    public User getUser(int id) {
+        return userDao.getUser(id);
     }
 }

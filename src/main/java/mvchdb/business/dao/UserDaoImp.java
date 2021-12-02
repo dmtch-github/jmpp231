@@ -22,14 +22,9 @@ public class UserDaoImp implements UserDao{
     }
 
     @Override
-    public void addUser(User user) {
+    public void saveUser(User user) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(user);
-    }
-
-    @Override
-    public void updateUser() {
-
+        session.saveOrUpdate(user);
     }
 
     @Override
@@ -39,5 +34,11 @@ public class UserDaoImp implements UserDao{
         session.createQuery(hqlDelete)
                 .setParameter("id", id)
                 .executeUpdate();
+    }
+
+    @Override
+    public User getUser(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(User.class,id);
     }
 }

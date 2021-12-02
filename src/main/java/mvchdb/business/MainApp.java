@@ -26,7 +26,7 @@ public class MainApp {
 
         System.out.println(user);
 
-        userService.addUser(user);
+        userService.saveUser(user);
 
         userService.deleteUser(7);
 

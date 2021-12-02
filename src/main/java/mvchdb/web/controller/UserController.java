@@ -4,9 +4,10 @@ import mvchdb.business.entities.User;
 import mvchdb.business.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController {
@@ -18,22 +19,36 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/add")
-    public String getUsers(ModelMap model) {
+    @RequestMapping({"/", "/saveUser"})
+    public String showAllUsers(ModelMap model) {
         model.addAttribute("listUsers", userService.getUsers());
-        return "all-users";
+        return "show-all-users";
     }
 
-    @RequestMapping("/")
-    public String addUser(Model model) {
+    @RequestMapping(value = "/idUser", params = {"idDelete"})
+    public String deleteUser(ModelMap model, HttpServletRequest req) {
+        int id = Integer.parseInt(req.getParameter("idDelete"));
+        userService.deleteUser(id);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/idUser", params = {"idUpdate"})
+    public String updateUser(ModelMap model, HttpServletRequest req) {
+        int id = Integer.parseInt(req.getParameter("idUpdate"));
+        model.addAttribute("user", userService.getUser(id));
+        return "show-user";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUser(ModelMap model) {
         model.addAttribute("user", new User());
-        return "add-user";
+        return "show-user";
     }
 
-    @RequestMapping("/ok")
-    public String saveUser(Model model) {
-        User user = (User)model.getAttribute("user");
-        System.out.println(user);
-        return "ok";
+    @RequestMapping(value = "/saveUser", params = {"save"})
+    public String saveUser(User user) {
+        userService.saveUser(user);
+        return "redirect:/";
     }
+
 }
