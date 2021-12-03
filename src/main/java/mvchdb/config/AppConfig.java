@@ -27,15 +27,12 @@ public class AppConfig {
 
     @Bean
     public DataSource getDataSource() {
+        //сделано через библиотеку c3p0
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClass(env.getProperty("db.driver"));
         dataSource.setUser(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
         dataSource.setJdbcUrl(env.getProperty("db.url"));
-//        dataSource.setDriverClassName(env.getProperty("db.driver"));
-//        dataSource.setUrl(env.getProperty("db.url"));
-//        dataSource.setUsername(env.getProperty("db.username"));
-//        dataSource.setPassword(env.getProperty("db.password"));
         return dataSource;
     }
 

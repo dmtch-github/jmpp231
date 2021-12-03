@@ -3,6 +3,7 @@ package mvchdb.business.service;
 import mvchdb.business.dao.UserDao;
 import mvchdb.business.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,7 +15,7 @@ public class UserServiceImp implements UserService{
     private final UserDao userDao;
 
     @Autowired
-    public UserServiceImp(UserDao userDao) {
+    public UserServiceImp(@Qualifier("daoEntityManager") UserDao userDao) {
         this.userDao = userDao;
     }
 
