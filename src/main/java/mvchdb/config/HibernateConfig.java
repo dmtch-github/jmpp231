@@ -16,6 +16,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * Для отключения SessionFactory необходимо:
+ * 1. закомментировать здесь все @Bean
+ * 2. в UserServiceImpl переопределить userDao
+ */
+
 @Configuration
 @ComponentScan("mvchdb")
 @PropertySource("classpath:db.properties")
@@ -25,7 +31,7 @@ public class HibernateConfig {
     @Autowired
     private Environment env;
 
-    @Bean
+    //@Bean
     public DataSource getDataSource() {
         //сделано через библиотеку c3p0
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -36,7 +42,7 @@ public class HibernateConfig {
         return dataSource;
     }
 
-    @Bean
+    //@Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
@@ -50,7 +56,7 @@ public class HibernateConfig {
         return factoryBean;
     }
 
-    @Bean
+    //@Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(getSessionFactory().getObject());

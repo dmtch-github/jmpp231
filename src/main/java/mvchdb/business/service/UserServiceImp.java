@@ -15,7 +15,7 @@ public class UserServiceImp implements UserService{
     private final UserDao userDao;
 
     @Autowired
-    public UserServiceImp(@Qualifier("userDaoImp") UserDao userDao) {
+    public UserServiceImp(@Qualifier("userEmDaoImp") UserDao userDao) {
         this.userDao = userDao;
     }
 

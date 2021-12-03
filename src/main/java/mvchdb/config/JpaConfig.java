@@ -18,6 +18,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * Для отключения EntityManager необходимо:
+ * 1. закомментировать здесь все @Bean
+ * 2. в UserServiceImpl переопределить userDao
+ */
+
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
@@ -26,7 +32,7 @@ public class JpaConfig {
     @Autowired
     private Environment env;
 
-    //@Bean
+    @Bean
     public DataSource getDataSource(){
         //сделано через библиотеку javax.sql
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -37,7 +43,7 @@ public class JpaConfig {
         return dataSource;
     }
 
-    //@Bean
+    @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf
                 = new LocalContainerEntityManagerFactoryBean();
@@ -55,17 +61,15 @@ public class JpaConfig {
         return emf;
     }
 
-    //@Bean
+    @Bean
     public PlatformTransactionManager getTransactionManagerEmf() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
 
-    //@Bean
+    @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
-
 }
