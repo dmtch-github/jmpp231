@@ -1,12 +1,14 @@
 # jmpp231
 
 
-<ul> <b>Планы</b>
-<li>Заменить SessionFactory на EntityManager</li>
+<ul> <b>Планы/Вопросы</b>
+<li>Внедрить шаблон DTO</li>
+<li>Как развести SessionFactory и EntityManager? Обязательно комментировать?</li>
 </ul>
 
 
-<ul> <b>Текущие ошибки</b>
+<ul> <b>2021.12.03 Сделано</b>
+<li>Заменил SessionFactory на EntityManager</li>
 <li>Удалить web-xml и тестовый файл с main()</li>
 </ul>
 

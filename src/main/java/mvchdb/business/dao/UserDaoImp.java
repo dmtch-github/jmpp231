@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("daoSessionFactory")
+@Repository
 public class UserDaoImp implements UserDao{
 
     @Autowired
@@ -17,8 +17,7 @@ public class UserDaoImp implements UserDao{
     @Override
     public List<User> getUsers() {
         Session session = sessionFactory.getCurrentSession();
-        List<User> list = session.createQuery("FROM User ",User.class).getResultList();
-        return list;
+        return session.createQuery("FROM User ",User.class).getResultList();
     }
 
     @Override

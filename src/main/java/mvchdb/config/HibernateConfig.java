@@ -20,7 +20,7 @@ import java.util.Properties;
 @ComponentScan("mvchdb")
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-public class AppConfig {
+public class HibernateConfig {
 
     @Autowired
     private Environment env;

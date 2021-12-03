@@ -3,7 +3,6 @@ package mvchdb.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -20,17 +19,15 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("mvchdb")
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-//@EnableJpaRepositories(“com.devcolibri.dataexam.repository”)
 public class JpaConfig {
 
     @Autowired
     private Environment env;
 
-    @Bean
-    public DataSource getDataSourceEmf(){
+    //@Bean
+    public DataSource getDataSource(){
         //сделано через библиотеку javax.sql
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("db.driver"));
@@ -40,12 +37,12 @@ public class JpaConfig {
         return dataSource;
     }
 
-    @Bean
+    //@Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf
                 = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(getDataSourceEmf());
-        emf.setPackagesToScan(new String[] {"mvchdb"}); //заменяет ComponentScan
+        emf.setDataSource(getDataSource());
+        emf.setPackagesToScan("mvchdb"); //заменяет ComponentScan
 
         Properties props = new Properties();
         props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
@@ -55,19 +52,17 @@ public class JpaConfig {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(vendorAdapter);
         emf.setJpaProperties(props);
-
         return emf;
     }
 
-    @Bean
+    //@Bean
     public PlatformTransactionManager getTransactionManagerEmf() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-
         return transactionManager;
     }
 
-    @Bean
+    //@Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
         return new PersistenceExceptionTranslationPostProcessor();
     }
